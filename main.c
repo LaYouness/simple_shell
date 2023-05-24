@@ -5,14 +5,14 @@
 */
 void env(void)
 {
-        char **envi = environ;
+char **envi = environ;
 
-        while (*envi)
-        {
-                _print_str(*envi);
-                _print_str("\n");
-                envi++;
-        }
+while (*envi)
+{
+_print_str(*envi);
+_print_str("\n");
+envi++;
+}
 }
 
 /**
@@ -49,7 +49,7 @@ int main(int argc, char **argv)
 		}
 
 		check_input(splited_input);
-		free (line);
+		free(line);
 		free(splited_input);
 	}
 

@@ -14,6 +14,7 @@ char **split_input(char *line)
 	int number_tokens = 0, i;
 	char *line_copy;
 	char **argv;
+
 	line_copy = _strdup(line);
 	tokens = _strtok(line_copy, delimiters);
 	if (tokens == NULL)

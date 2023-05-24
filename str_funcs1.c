@@ -63,7 +63,7 @@ size_t _strlen(const char *str)
 }
 
 /**
-* _strncmp - compare two strings 
+* _strncmp - compare two strings
 *@s1: string 1
 *@s2: string 2
 *@n: num of char to comp
