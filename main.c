@@ -1,45 +1,43 @@
 #include "shell.h"
 /**
-* env - env built-in
-* by youness & sahahr
-*/
-void env(void)
-{
-char **envi = environ;
+ * C_andler - handles SIGINT
+ * @sig_num: signal
+ */
 
-while (*envi)
+void C_handler(int sig_num)
 {
-_print_str(*envi);
-_print_str("\n");
-envi++;
+	(void)sig_num;
+	signal(SIGINT, C_handler);
+	fflush(stdout);
 }
-}
-
+void C_handler(int sig_num);
 /**
-* main - main_function
-* @argc: argument
-* @argv: argument
-* by: Laila&Mega
+* main - entry
+* @argc: num of args
+* @argv: list of arg
+* by youness & sahar
 *
-* Return: always 0 , 1 if it fails
+* Return: 0 or 1
 */
 int main(int argc, char **argv)
 {
 	char *line = NULL;
+	char **splited_input;
+	ssize_t chars_read;
 	size_t n = 0;
 
-	ssize_t chars_read;
-	char **splited_input;
-	(void) argc;
-	(void) argv;
+	(void)argc;
+	(void)argv;
 
+	signal(SIGINT, C_handler);
 	while (1)
 	{
 		_prompt();
 		chars_read = getline(&line, &n, stdin);
 		if (chars_read == -1)
 		{
-		_print_str("\nExiting from shell...See you later\n");
+			if(isatty(STDIN_FILENO))
+				write(STDOUT_FILENO, "\n", 1);
 			break;
 		}
 		splited_input = split_input(line);
@@ -47,11 +45,24 @@ int main(int argc, char **argv)
 		{
 			continue;
 		}
-
 		check_input(splited_input);
-		free(line);
 		free(splited_input);
 	}
-
+	free(line);
 	return (0);
+}
+/**
+* env - exec env
+* by youness & sahar
+*/
+void env(void)
+{
+	char **envi = environ;
+
+	while (*envi)
+	{
+		_print_str(*envi);
+		_print_str("\n");
+		envi++;
+	}
 }

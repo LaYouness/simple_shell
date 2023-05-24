@@ -10,6 +10,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <stdarg.h>
+#include <fcntl.h>
 
 #define BUFSIZE 1024
 #define MAX_ALIAS_CMP 100
