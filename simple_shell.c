@@ -12,7 +12,7 @@
  */
 int main(__attribute__((unused))int ac, char **av, char **env)
 {
-	char *cmd, **args, **env_t;
+	char *command, **args, **env_t;
 	int i;
 
 	env_t = make_copy(env), i = 1;
@@ -24,11 +24,11 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "$ ", 2);
 
-		cmd = read_cmd(env_t);
-		args = read_args(cmd, env_t);
-		i = execute_cmd(cmd, args, &env_t, av[0]);
-		if (cmd)
-			free(cmd);
+		command = read_command(env_t);
+		args = read_args(command, env_t);
+		i = execute_command(command, args, &env_t, av[0]);
+		if (command)
+			free(command);
 		if (args)
 			free(args);
 	}
